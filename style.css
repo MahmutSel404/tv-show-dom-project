@@ -1,3 +1,7 @@
-#root {
-  color: red;
+.green {
+  background-color: green;
+}
+.episode {
+  background-color: yellow;
+  padding : 10px 40px;
 }
