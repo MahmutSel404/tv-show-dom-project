@@ -7,12 +7,11 @@ bodyMain.className = "row";
 
 function makePageForEpisodes(episodeList) {
   episodeList.forEach((element) => {
-    // const bodyMain = document.createElement("div");
-    // bodyMain.className = "border col-md-4 col-sm-12";
     const episodeWrapper = document.createElement("div");
     episodeWrapper.className = "green col-sm-12 col-md-6 col-lg-4";
 
     const bodyEpisode = document.createElement("div");
+    bodyEpisode.id = element.id;
     bodyEpisode.className = "episode border";
 
     const header = document.createElement("div");
@@ -46,28 +45,43 @@ function makePageForEpisodes(episodeList) {
       document.body.style.backgroundColor =
         "rgb(" + e.offsetX + "," + e.offsetY + ",40)";
     }
-    
+
     // mainEl.appendChild(bodyMain);
   });
   mainEl.appendChild(bodyMain);
 }
-//const headerStyle = document.getElementsByClassName("header");
-
-//You can edit ALL of the code here
 function setup() {
   const allEpisodes = getAllEpisodes();
   makePageForEpisodes(allEpisodes);
 }
-// function filterSearch(userSearch){
-//   const allEpisodes = getAllEpisodes();
-//   const searchResults = allEpisodes.filter(episode => {
-//     return episode.name.includes(userSearch);
-//   });
-//   return searchResults;
-// }
+
+//level 200
+const filter = document.getElementById("filter");
+filter.addEventListener("keydown", filterSearch);
+
+function filterSearch(e) {
+  const userSearch = e.target.value.toLowerCase();
+  //console.log(userSearch);
+
+  const allEpisodes = getAllEpisodes();
+
+  allEpisodes.forEach((episode) => {
+    const episodeElement = document.getElementById(episode.id);
+    if (episode.name.toLowerCase().indexOf(userSearch) > -1) {
+      episodeElement.style.display = "block";
+    } else {
+      episodeElement.style.display = "none";
+    }
+  });
+}
 
 window.onload = setup();
-//Add an input in the page
-//Add an eventlisterner "keydown"
+//Add an input in the page //done
+//Add an eventlisterner "keydown" // done
 //when the user touch the keyboard, call the function filterSearch(input.value).
 // event.target.value  (search)
+
+// const searchResults = allEpisodes.filter(episode => {
+//   return episode.name.includes(userSearch);
+// });
+// return searchResults;
